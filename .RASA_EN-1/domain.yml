@@ -1,0 +1,110 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- request_consultation:
+    use_entities: []
+- chitchat:
+    use_entities: []
+- inform
+- affirm
+- deny
+- stop
+- thankyou
+- greet
+- bot_challenge
+- enter_age
+- inform_pain_yn
+- inform_pain_level
+entities:
+- purpose
+- objective
+- number
+- pain_yn
+- pain_level
+slots:
+  age:
+    type: unfeaturized
+    auto_fill: false
+  objective:
+    type: unfeaturized
+    auto_fill: false
+  purpose:
+    type: unfeaturized
+    auto_fill: false
+  pain_yn:
+    type: unfeaturized
+    auto_fill: false      
+  pain_level:
+    type: unfeaturized
+    auto_fill: false  
+  requested_slot:
+    type: unfeaturized
+responses:
+  utter_ask_purpose:
+  - text: for which purpose?
+    buttons:
+    - title: "Medical"
+      payload: '/inform{"purpose": "Medical"}'
+    - title: "Dental"
+      payload: '/inform{"purpose": "Dental"}'      
+    - title: "Surgery"
+      payload: '/inform{"purpose": "Surgery"}'
+  utter_ask_objective:
+  - text: for which objective?
+    buttons:
+    - title: "Consultation"
+      payload: '/request_consultation{"objective": "consultation"}'
+    - title: "Rendez-vous"
+      payload: '/request_consultation{"objective": "rendez-vous"}'      
+    - title: "Urgency"
+      payload: '/request_consultation{"objective": "urgency"}'  
+  utter_ask_age:
+  - text: how old are you?  
+  utter_ask_pain_yn:
+  - text: are you in pain?
+    buttons:
+    - title: "yes"
+      payload: '/inform_pain_yn{"pain_yn": "yes"}'
+    - title: "no"
+      payload: '/inform_pain_yn{"pain_yn": "no"}'   
+  utter_ask_pain_level:
+  - text: "How do you rate the pain? (on a scale of 1 to 3)"   
+    buttons:
+    - title: "Low"
+      payload: '/inform_pain_level{"pain_level": "Low"}'
+    - title: "Medium"
+      payload: '/inform_pain_level{"pain_level": "Medium"}'
+    - title: "High"
+      payload: '/inform_pain_level{"pain_level": "High"}'   
+  utter_ask_family_name:
+  - text: what is you name?
+  utter_wrong_purpose:
+  - text: purpose type is not in the database, please try again
+  utter_wrong_objective:
+  - text: objective type is not in the database, please try again
+  utter_wrong_age:
+  - text: age must be a numeric value, please try again
+  utter_wrong_pain_yn:
+  - text: question must be answered by a boolean value (true/false), please try again  
+  utter_submit:
+  - text: All done!
+  utter_slots_values:
+  - text: "I am going to run a file using the following parameters:\n - purpose: {purpose}\n\
+      \ - objective: {objective}\n - age : {age} \n - pain : {pain_yn} \n - pain_level : {pain_level} \n"
+  utter_noworries:
+  - text: you are welcome :)
+  utter_chitchat:
+  - text: chitchat
+  utter_ask_continue:
+  - text: do you need anything else?
+  utter_default:
+  - text: sorry, I didn't understand you, please try input something else
+  utter_greet:
+  - text: Bonjour! Hello! What brings you here today?
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_restart:
+  - text: restarted 
+forms:
+- consultation_form
